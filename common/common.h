@@ -657,51 +657,6 @@ typedef enum ACTUATOR_OUTPUT_FUNCTION
 } ACTUATOR_OUTPUT_FUNCTION;
 #endif
 
-/** @brief Enable axes that will be tuned via autotuning. Used in MAV_CMD_DO_AUTOTUNE_ENABLE. */
-#ifndef HAVE_ENUM_AUTOTUNE_AXIS
-#define HAVE_ENUM_AUTOTUNE_AXIS
-typedef enum AUTOTUNE_AXIS
-{
-   AUTOTUNE_AXIS_DEFAULT=0, /* Flight stack tunes axis according to its default settings. | */
-   AUTOTUNE_AXIS_ROLL=1, /* Autotune roll axis. | */
-   AUTOTUNE_AXIS_PITCH=2, /* Autotune pitch axis. | */
-   AUTOTUNE_AXIS_YAW=4, /* Autotune yaw axis. | */
-   AUTOTUNE_AXIS_ENUM_END=5, /*  | */
-} AUTOTUNE_AXIS;
-#endif
-
-/** @brief 
-        Actions for reading/writing parameters between persistent and volatile storage when using MAV_CMD_PREFLIGHT_STORAGE.
-        (Commonly parameters are loaded from persistent storage (flash/EEPROM) into volatile storage (RAM) on startup and written back when they are changed.)
-       */
-#ifndef HAVE_ENUM_PREFLIGHT_STORAGE_PARAMETER_ACTION
-#define HAVE_ENUM_PREFLIGHT_STORAGE_PARAMETER_ACTION
-typedef enum PREFLIGHT_STORAGE_PARAMETER_ACTION
-{
-   PARAM_READ_PERSISTENT=0, /* Read all parameters from persistent storage. Replaces values in volatile storage. | */
-   PARAM_WRITE_PERSISTENT=1, /* Write all parameter values to persistent storage (flash/EEPROM) | */
-   PARAM_RESET_CONFIG_DEFAULT=2, /* Reset all user configurable parameters to their default value (including airframe selection, sensor calibration data, safety settings, and so on). Does not reset values that contain operation counters and vehicle computed statistics. | */
-   PARAM_RESET_SENSOR_DEFAULT=3, /* Reset only sensor calibration parameters to factory defaults (or firmware default if not available) | */
-   PARAM_RESET_ALL_DEFAULT=4, /* Reset all parameters, including operation counters, to default values | */
-   PREFLIGHT_STORAGE_PARAMETER_ACTION_ENUM_END=5, /*  | */
-} PREFLIGHT_STORAGE_PARAMETER_ACTION;
-#endif
-
-/** @brief 
-        Actions for reading and writing plan information (mission, rally points, geofence) between persistent and volatile storage when using MAV_CMD_PREFLIGHT_STORAGE.
-        (Commonly missions are loaded from persistent storage (flash/EEPROM) into volatile storage (RAM) on startup and written back when they are changed.)
-       */
-#ifndef HAVE_ENUM_PREFLIGHT_STORAGE_MISSION_ACTION
-#define HAVE_ENUM_PREFLIGHT_STORAGE_MISSION_ACTION
-typedef enum PREFLIGHT_STORAGE_MISSION_ACTION
-{
-   MISSION_READ_PERSISTENT=0, /* Read current mission data from persistent storage | */
-   MISSION_WRITE_PERSISTENT=1, /* Write current mission data to persistent storage | */
-   MISSION_RESET_DEFAULT=2, /* Erase all mission data stored on the vehicle (both persistent and volatile storage) | */
-   PREFLIGHT_STORAGE_MISSION_ACTION_ENUM_END=3, /*  | */
-} PREFLIGHT_STORAGE_MISSION_ACTION;
-#endif
-
 /** @brief Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. NaN and INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current yaw or latitude rather than a specific value). See https://mavlink.io/en/guide/xml_schema.html#MAV_CMD for information about the structure of the MAV_CMD entries */
 #ifndef HAVE_ENUM_MAV_CMD
 #define HAVE_ENUM_MAV_CMD
