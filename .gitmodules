@@ -1,0 +1,3 @@
+[submodule "mavlink_generator"]
+	path = mavlink_generator
+	url = https://github.com/mavlink/mavlink

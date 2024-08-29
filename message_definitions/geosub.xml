@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<mavlink>
+ <include>uAvionix.xml</include>
+ <messages>
+    <message id="14001" name="GEOSUB_LINEAR_VALUES">
+        <description>Linear position, velocity and acceleration given in X, Y and Z axis</description>
+        <field type="float" name="x_pos">X Position</field>
+        <field type="float" name="y_pos">Y Position</field>
+        <field type="float" name="z_pos">Z Position</field>
+        <field type="float" name="x_vel">X Velocity</field>
+        <field type="float" name="y_vel">Y Velocity</field>
+        <field type="float" name="z_vel">Z Velocity</field>
+        <field type="float" name="x_acc">X Acceleration</field>
+        <field type="float" name="y_acc">Y Acceleration</field>
+        <field type="float" name="z_acc">Z Acceleration</field>
+    </message>
+    <message id="14002" name="GEOSUB_ANGULAR_VALUES">
+        <description>Angular position, velocity and acceleration given in roll, pitch and yaw</description>
+        <field type="float" name="roll_pos">Roll Position</field>
+        <field type="float" name="pitch_pos">Pitch Position</field>
+        <field type="float" name="yaw_pos">Yaw Position</field>
+        <field type="float" name="roll_vel">Roll Velocity</field>
+        <field type="float" name="pitch_vel">Pitch Velocity</field>
+        <field type="float" name="yaw_vel">Yaw Velocity</field>
+        <field type="float" name="roll_acc">Roll Acceleration</field>
+        <field type="float" name="pitch_acc">Pitch Acceleration</field>
+        <field type="float" name="yaw_acc">Yaw Acceleration</field>
+    </message>
+    <message id="14003" name="GEOSUB_MISC_VALUES">
+        <description></description>
+        <field type="float"   name="integrity">integrity</field>
+        <field type="uint8_t" name="num_sat">Number of satellites</field>
+        <field type="int8_t"  name="sbas_correction">Yaw Position</field>
+    </message>
+    <message id="14004" name="GEOSUB_ADSB_IN">
+        <description></description>
+        <field type="uint32_t" name="icao_address">ICAO Address</field>
+        <field type="int32_t" name="lat">latitude</field>
+        <field type="int32_t" name="lon">longitude</field>
+        <field type="int32_t" name="alt">altitude</field>
+        <field type="uint16_t" name="heading">heading</field>
+        <field type="uint16_t" name="hor_velocity">horizontal velocity</field>
+        <field type="int16_t" name="ver_velocity">vertical velocity</field>
+        <field type="uint16_t" name="valid_flags">valid flags</field>
+        <field type="uint16_t" name="squawk">squawk</field>
+        <field type="uint8_t" name="altitude_type">altitude type</field>
+        <field type="char[9]" name="callsign">calssign</field>
+        <field type="uint8_t" name="emitter_type">emitter type</field>
+        <field type="uint8_t" name="tslc">tslc</field>
+    </message>
+    <message id="14005" name="GEOSUB_ADSB_OUT_DYNAMIC">
+        <description></description>
+        <field type="uint32_t" name="utc_time">UTC Time</field>
+        <field type="int32_t" name="lat">latitude</field>
+        <field type="int32_t" name="lon">longitude</field>
+        <field type="int32_t" name="alt_pres"></field>
+        <field type="int32_t" name="alt_gnss"></field>
+        <field type="uint32_t" name="hor_acc">horizontal acceleration</field>
+        <field type="uint32_t" name="ver_acc">horizontal acceleration</field>
+        <field type="uint32_t" name="acc_vel">acceleration velocity</field>
+        <field type="int16_t" name="ver_velocity">vertical velocity</field>
+        <field type="int16_t" name="ns_vog">North/South ...</field>
+        <field type="int16_t" name="ew_vog">East/West ...</field>
+        <field type="uint16_t" name="state"></field>
+        <field type="uint16_t" name="squawk">squawk</field>
+        <field type="uint8_t" name="fix_type">fix type</field>
+        <field type="uint8_t" name="num_sats">Num sats vista</field>
+        <field type="uint8_t" name="em_status"></field>
+        <field type="uint8_t" name="control">control</field>
+    </message>
+    <message id="14006" name="GEOSUB_ADSB_OUT_STATIC">
+        <description></description>
+        <field type="uint8_t[3]" name="ICAO_address">ICAO Address</field>
+        <field type="uint8_t" name="integrity">Integrity</field>
+        <field type="uint16_t" name="stall_speed">Stall Speed</field>
+        <field type="char[8]" name="callsign">calssign</field>
+        <field type="uint8_t" name="capability">Capability</field>
+        <field type="uint8_t" name="emitter">Emitter</field>
+        <field type="uint8_t" name="alw_encode">ALW encode</field>
+        <field type="uint8_t" name="gps_lat_offs">gps latitude offset</field>
+        <field type="uint8_t" name="gps_lon_offs">gps longitude offset</field>
+    </message>
+    <message id="14007" name="GEOSUB_MONITORING_ALERT">
+        <description></description>
+        <field type="uint8_t" name="alert_type">Alert Type</field>
+        <field type="uint32_t" name="ICAO_address">ICAO Address</field>
+        <field type="uint8_t" name="threat_level">see MAV_COLLISION_THREAT_LEVEL enum</field>
+        <field type="uint8_t" name="collision_src">see MAV_COLLISION_SRC enum</field>
+        <field type="uint8_t" name="collision_action">see MAV_COLLISION_ACTION enum</field>
+        <field type="uint8_t" name="status_adsb"></field>
+    </message>
+    <message id="14008" name="GEOSUB_MONITORING_COLLISION">
+        <description></description>
+        <field type="uint8_t" name="collision_src">see MAV_COLLISION_SRC enum</field>
+        <field type="uint32_t" name="id">id</field>
+        <field type="uint8_t" name="collision_action">see MAV_COLLISION_ACTION enum</field>
+        <field type="uint8_t" name="threat_level">see MAV_COLLISION_THREAT_LEVEL enum</field>
+        <field type="float" name="time_to_minimum_delta">Time to minimum delta</field>
+        <field type="float" name="altitude_minimum_delta">Altitude minimum delta</field>
+        <field type="float" name="horizontal_minimum_delta">Horizontal minimum delta</field>
+    </message>
+    <message id="14009" name="DEVICE_STATUS">
+        <description></description>
+        <field type="uint32_t" name="status">Device Status</field>
+    </message>
+ </messages>
+</mavlink>
