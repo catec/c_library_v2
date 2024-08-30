@@ -99,7 +99,7 @@
         <field type="float" name="altitude_minimum_delta">Altitude minimum delta</field>
         <field type="float" name="horizontal_minimum_delta">Horizontal minimum delta</field>
     </message>
-    <message id="14009" name="DEVICE_STATUS">
+    <message id="14009" name="GEOSUB_DEVICE_STATUS">
         <description></description>
         <field type="uint32_t" name="status">Device Status</field>
     </message>

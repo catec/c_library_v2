@@ -522,21 +522,21 @@ static void mavlink_test_geosub_monitoring_collision(uint8_t system_id, uint8_t 
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
-static void mavlink_test_device_status(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+static void mavlink_test_geosub_device_status(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
     mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
-        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_DEVICE_STATUS >= 256) {
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_GEOSUB_DEVICE_STATUS >= 256) {
             return;
         }
 #endif
     mavlink_message_t msg;
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
-    mavlink_device_status_t packet_in = {
+    mavlink_geosub_device_status_t packet_in = {
         963497464
     };
-    mavlink_device_status_t packet1, packet2;
+    mavlink_geosub_device_status_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
         packet1.status = packet_in.status;
         
@@ -544,22 +544,22 @@ static void mavlink_test_device_status(uint8_t system_id, uint8_t component_id, 
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
         if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
            // cope with extensions
-           memset(MAVLINK_MSG_ID_DEVICE_STATUS_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_DEVICE_STATUS_MIN_LEN);
+           memset(MAVLINK_MSG_ID_GEOSUB_DEVICE_STATUS_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_GEOSUB_DEVICE_STATUS_MIN_LEN);
         }
 #endif
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_device_status_encode(system_id, component_id, &msg, &packet1);
-    mavlink_msg_device_status_decode(&msg, &packet2);
+    mavlink_msg_geosub_device_status_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_geosub_device_status_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_device_status_pack(system_id, component_id, &msg , packet1.status );
-    mavlink_msg_device_status_decode(&msg, &packet2);
+    mavlink_msg_geosub_device_status_pack(system_id, component_id, &msg , packet1.status );
+    mavlink_msg_geosub_device_status_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_device_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.status );
-    mavlink_msg_device_status_decode(&msg, &packet2);
+    mavlink_msg_geosub_device_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.status );
+    mavlink_msg_geosub_device_status_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
@@ -567,12 +567,12 @@ static void mavlink_test_device_status(uint8_t system_id, uint8_t component_id, 
         for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
             comm_send_ch(MAVLINK_COMM_0, buffer[i]);
         }
-    mavlink_msg_device_status_decode(last_msg, &packet2);
+    mavlink_msg_geosub_device_status_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_device_status_send(MAVLINK_COMM_1 , packet1.status );
-    mavlink_msg_device_status_decode(last_msg, &packet2);
+    mavlink_msg_geosub_device_status_send(MAVLINK_COMM_1 , packet1.status );
+    mavlink_msg_geosub_device_status_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
@@ -586,7 +586,7 @@ static void mavlink_test_geosub(uint8_t system_id, uint8_t component_id, mavlink
     mavlink_test_geosub_adsb_out_static(system_id, component_id, last_msg);
     mavlink_test_geosub_monitoring_alert(system_id, component_id, last_msg);
     mavlink_test_geosub_monitoring_collision(system_id, component_id, last_msg);
-    mavlink_test_device_status(system_id, component_id, last_msg);
+    mavlink_test_geosub_device_status(system_id, component_id, last_msg);
 }
 
 #ifdef __cplusplus
