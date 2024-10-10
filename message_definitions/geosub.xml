@@ -103,5 +103,11 @@
         <description></description>
         <field type="uint32_t" name="status">Device Status</field>
     </message>
+    <message id="14010" name="GEOSUB_GPS_FEEDBACK">
+        <description></description>
+        <field type="uint32_t" name="utc_time">UTC Time</field>
+        <field type="int32_t" name="lat">latitude</field>
+        <field type="int32_t" name="lon">longitude</field>
+    </message>
  </messages>
 </mavlink>
