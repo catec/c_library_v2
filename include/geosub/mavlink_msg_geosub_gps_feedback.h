@@ -1,7 +1,7 @@
 #pragma once
 // MESSAGE GEOSUB_GPS_FEEDBACK PACKING
 
-#define MAVLINK_MSG_ID_GEOSUB_GPS_FEEDBACK 14010
+#define MAVLINK_MSG_ID_GEOSUB_GPS_FEEDBACK 13999
 
 
 typedef struct __mavlink_geosub_gps_feedback_t {
@@ -12,17 +12,17 @@ typedef struct __mavlink_geosub_gps_feedback_t {
 
 #define MAVLINK_MSG_ID_GEOSUB_GPS_FEEDBACK_LEN 12
 #define MAVLINK_MSG_ID_GEOSUB_GPS_FEEDBACK_MIN_LEN 12
-#define MAVLINK_MSG_ID_14010_LEN 12
-#define MAVLINK_MSG_ID_14010_MIN_LEN 12
+#define MAVLINK_MSG_ID_13999_LEN 12
+#define MAVLINK_MSG_ID_13999_MIN_LEN 12
 
 #define MAVLINK_MSG_ID_GEOSUB_GPS_FEEDBACK_CRC 86
-#define MAVLINK_MSG_ID_14010_CRC 86
+#define MAVLINK_MSG_ID_13999_CRC 86
 
 
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_GEOSUB_GPS_FEEDBACK { \
-    14010, \
+    13999, \
     "GEOSUB_GPS_FEEDBACK", \
     3, \
     {  { "utc_time", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_geosub_gps_feedback_t, utc_time) }, \
