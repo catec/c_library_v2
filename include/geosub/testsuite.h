@@ -576,6 +576,82 @@ static void mavlink_test_geosub_device_status(uint8_t system_id, uint8_t compone
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
+static void mavlink_test_geosub_primecor(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_GEOSUB_PRIMECOR >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_geosub_primecor_t packet_in = {
+        17.0,45.0,73.0,101.0,129.0,157.0,185.0,213.0,241.0,269.0,297.0,325.0,19731,19835,161,"BCDEFGHIJKLMNOPQ",87,"TUVWX","ZABCDEFG",135,"JKLMN",92,"Q"
+    };
+    mavlink_geosub_primecor_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.lat = packet_in.lat;
+        packet1.lng = packet_in.lng;
+        packet1.altGps = packet_in.altGps;
+        packet1.hdop = packet_in.hdop;
+        packet1.velms = packet_in.velms;
+        packet1.pdop = packet_in.pdop;
+        packet1.vdop = packet_in.vdop;
+        packet1.pressBar = packet_in.pressBar;
+        packet1.altBar = packet_in.altBar;
+        packet1.altAgl = packet_in.altAgl;
+        packet1.altAmsl = packet_in.altAmsl;
+        packet1.tempBar = packet_in.tempBar;
+        packet1.msgID = packet_in.msgID;
+        packet1.batLvl = packet_in.batLvl;
+        packet1.hdr = packet_in.hdr;
+        packet1.rssi = packet_in.rssi;
+        packet1.fixState = packet_in.fixState;
+        packet1.numSat = packet_in.numSat;
+        
+        mav_array_memcpy(packet1.devSN, packet_in.devSN, sizeof(char)*17);
+        mav_array_memcpy(packet1.date, packet_in.date, sizeof(char)*6);
+        mav_array_memcpy(packet1.time, packet_in.time, sizeof(char)*9);
+        mav_array_memcpy(packet1.cog, packet_in.cog, sizeof(char)*6);
+        mav_array_memcpy(packet1.end, packet_in.end, sizeof(char)*2);
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_GEOSUB_PRIMECOR_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_GEOSUB_PRIMECOR_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_geosub_primecor_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_geosub_primecor_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_geosub_primecor_pack(system_id, component_id, &msg , packet1.msgID , packet1.hdr , packet1.devSN , packet1.batLvl , packet1.rssi , packet1.date , packet1.time , packet1.lat , packet1.lng , packet1.altGps , packet1.hdop , packet1.velms , packet1.fixState , packet1.cog , packet1.numSat , packet1.pdop , packet1.vdop , packet1.pressBar , packet1.altBar , packet1.altAgl , packet1.altAmsl , packet1.tempBar , packet1.end );
+    mavlink_msg_geosub_primecor_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_geosub_primecor_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.msgID , packet1.hdr , packet1.devSN , packet1.batLvl , packet1.rssi , packet1.date , packet1.time , packet1.lat , packet1.lng , packet1.altGps , packet1.hdop , packet1.velms , packet1.fixState , packet1.cog , packet1.numSat , packet1.pdop , packet1.vdop , packet1.pressBar , packet1.altBar , packet1.altAgl , packet1.altAmsl , packet1.tempBar , packet1.end );
+    mavlink_msg_geosub_primecor_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_geosub_primecor_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_geosub_primecor_send(MAVLINK_COMM_1 , packet1.msgID , packet1.hdr , packet1.devSN , packet1.batLvl , packet1.rssi , packet1.date , packet1.time , packet1.lat , packet1.lng , packet1.altGps , packet1.hdop , packet1.velms , packet1.fixState , packet1.cog , packet1.numSat , packet1.pdop , packet1.vdop , packet1.pressBar , packet1.altBar , packet1.altAgl , packet1.altAmsl , packet1.tempBar , packet1.end );
+    mavlink_msg_geosub_primecor_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
 static void mavlink_test_geosub_gps_feedback(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
@@ -643,6 +719,7 @@ static void mavlink_test_geosub(uint8_t system_id, uint8_t component_id, mavlink
     mavlink_test_geosub_monitoring_alert(system_id, component_id, last_msg);
     mavlink_test_geosub_monitoring_collision(system_id, component_id, last_msg);
     mavlink_test_geosub_device_status(system_id, component_id, last_msg);
+    mavlink_test_geosub_primecor(system_id, component_id, last_msg);
     mavlink_test_geosub_gps_feedback(system_id, component_id, last_msg);
 }
 

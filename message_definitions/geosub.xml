@@ -103,6 +103,32 @@
         <description></description>
         <field type="uint32_t" name="status">Device Status</field>
     </message>
+    <message id="14010" name="GEOSUB_PRIMECOR">
+        <description></description>
+        <field type="uint16_t" name="msgID">Sequence number</field>
+        <field type="uint8_t" name="hdr">Message header</field>
+        <field type="char[17]" name="devSN">Device serial number</field>
+        <field type="uint16_t" name="batLvl">Battery voltage level (mV)</field>
+        <field type="int8_t" name="rssi">Network signal quality</field>
+        <field type="char[6]" name="date">Date (ddmmaa)</field>
+        <field type="char[9]" name="time">Time (hhmmssnnn)</field>
+        <field type="float" name="lat">Latitude (degrees)</field>
+        <field type="float" name="lng">Longitude (degrees)</field>
+        <field type="float" name="altGps">GPS altitude (m)</field>
+        <field type="float" name="hdop">Horizontal precision</field>
+        <field type="float" name="velms">Speed (m/s)</field>
+        <field type="uint8_t" name="fixState">Fix state</field>
+        <field type="char[6]" name="cog">Course over ground</field>
+        <field type="uint8_t" name="numSat">Number of satellites</field>
+        <field type="float" name="pdop">Position dilution of precision</field>
+        <field type="float" name="vdop">Vertical dilution of precision</field>
+        <field type="float" name="pressBar">Barometric pressure (mbar)</field>
+        <field type="float" name="altBar">Barometric altitude (m)</field>
+        <field type="float" name="altAgl">AGL altitude (m)</field>
+        <field type="float" name="altAmsl">AMSL altitude (m)</field>
+        <field type="float" name="tempBar">Ambient temperature (°C)</field>
+        <field type="char[2]" name="end">End symbols</field>
+    </message>
     <message id="13999" name="GEOSUB_GPS_FEEDBACK">
         <description></description>
         <field type="uint32_t" name="utc_time">UTC Time</field>
